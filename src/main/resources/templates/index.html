@@ -114,9 +114,9 @@
 		<figcaption class="info-wrap">
 			<a href="#" class="title"><span th:text="${product.name}"></span></a>
 			<div class="action-wrap">
-				<a href="#" class="btn btn-primary btn-sm float-right"> <i class="fa fa-cart-plus"></i> Add </a>
+				<a th:href="@{/add/{id}/{amount}(id=${product.id},amount=1)}" class="btn btn-primary btn-sm float-right"> <i class="fa fa-cart-plus"></i> Add </a>
 				<div class="price-wrap h5">
-					<span class="price-new">$1280</span>
+					<span class="price-new" th:text="${product.price}">$1280</span>
 				</div> <!-- price-wrap.// -->
 			</div> <!-- action-wrap -->
 		</figcaption>
@@ -148,28 +148,33 @@
 	<figcaption class="media-body">
 		<h6 class="title text-truncate"><span th:text="${item.product.name}"></span></h6>
 	</figcaption>
-</figure> 
+</figure>
 	</td>
-	<td class="text-center"> 
+	<td class="text-center">
 		<div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group" aria-label="...">
+                                                                        <a th:href="@{/delete/{id}/{amount}(id=${item.product.id},amount=1)}">
 																		<button type="button"
                                                                                 class="m-btn btn btn-default"><i
                                                                                 class="fa fa-minus"></i></button>
+                                                                        </a>
+
 																		<button type="button"
                                                                                 class="m-btn btn btn-default"
                                                                                 disabled><span th:text="${item.quantity}"></span></button>
-																		<button type="button"
+																		<a th:href="@{/add/{id}/{amount}(id=${item.product.id},amount=1)}">
+                                                                                <button type="button"
                                                                                 class="m-btn btn btn-default"><i
                                                                                 class="fa fa-plus"></i></button>
+                                                                        </a>
 																	</div>
 	</td>
-	<td> 
-		<div class="price-wrap"> 
+	<td>
+		<div class="price-wrap">
 			<var class="price"><span th:text="${item.product.price}"></span></var>
 		</div> <!-- price-wrap .// -->
 	</td>
-	<td class="text-right"> 
-	<a href="" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+	<td class="text-right">
+	<a th:href="@{/remove/{id}(id=${item.product.id})}" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
 	</td>
 </tr>
 </tbody>
@@ -179,7 +184,7 @@
                 <div class="box">
                     <dl class="dlist-align">
                         <dt>Tax:</dt>
-                        <dd class="text-right">12%</dd>
+                        <dd class="text-right">0%</dd>
                     </dl>
                     <dl class="dlist-align">
                         <dt>Discount:</dt>
@@ -187,15 +192,15 @@
                     </dl>
                     <dl class="dlist-align">
                         <dt>Sub Total:</dt>
-                        <dd class="text-right">$215</dd>
+                        <dd th:text="${total}" class="text-right">$215</dd>
                     </dl>
                     <dl class="dlist-align">
                         <dt>Total:</dt>
-                        <dd class="text-right h4 b"> $215</dd>
+                        <dd th:text="${total}" class="text-right h4 b"> $215</dd>
                     </dl>
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="#" class="btn  btn-default btn-error btn-lg btn-block"><i
+                            <a th:href="@{clear}" class="btn  btn-default btn-error btn-lg btn-block"><i
                                     class="fa fa-times-circle "></i> Cancel </a>
                         </div>
                         <div class="col-md-6">
